@@ -25,8 +25,8 @@ export const ShowTask = ({tasklist,setTasklist,task,setTask}) => {
                             <span className="name">{todo.name}</span>
                             <span className="time">{todo.time}</span>
                         </p>
-                        <i onClick={()=> handleEdit(todo.id)} class="bi bi-pencil-square"></i>
-                        <i onClick={()=> handleDelete(todo.id)} class="bi bi-trash"></i>
+                        <i onClick={()=> handleEdit(todo.id)} className="bi bi-pencil-square"></i>
+                        <i onClick={()=> handleDelete(todo.id)} className="bi bi-trash"></i>
                     </li>
 
                 ))}

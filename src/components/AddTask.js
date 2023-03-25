@@ -13,6 +13,7 @@ export const AddTask = ({tasklist,setTasklist,task,setTask}) => {
           :todo
       ));
       setTasklist(updatedTasklist);
+      setTask({});
 
     } else{
       const date=new Date();
@@ -22,14 +23,14 @@ export const AddTask = ({tasklist,setTasklist,task,setTask}) => {
         time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`
       }
       setTasklist([...tasklist,newTask]);
-      event.target.task.value="";
+      setTask({});
     }
     
   }
   return (
     <section className="addTask">
         <form onSubmit={handleSubmit}>
-            <input type="text" name="task" value={task.name} autoComplete="off" placeholder="Add Task" maxLength={25} onChange={event => setTask({...task,name:event.target.value})}/>
+            <input type="text" name="task" value={task.name || ""} autoComplete="off" placeholder="Add Task" maxLength={25} onChange={event => setTask({...task,name:event.target.value})}/>
             <button type="submit">Add</button>
         </form>
     </section>
