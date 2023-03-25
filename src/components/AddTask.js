@@ -1,10 +1,35 @@
 import "../components/addTask.css"
 
-export const AddTask = () => {
+export const AddTask = ({tasklist,setTasklist,task,setTask}) => {
+  
+  const handleSubmit=(event)=>{
+    event.preventDefault();
+
+    if(task.id){
+      const date=new Date();
+      const updatedTasklist=tasklist.map((todo) => (
+        todo.id===task.id ?
+          {id:task.id,name: task.name,time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`} 
+          :todo
+      ));
+      setTasklist(updatedTasklist);
+
+    } else{
+      const date=new Date();
+      const newTask={
+        id:date.getTime(),
+        name:event.target.task.value ,
+        time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`
+      }
+      setTasklist([...tasklist,newTask]);
+      event.target.task.value="";
+    }
+    
+  }
   return (
     <section className="addTask">
-        <form>
-            <input type="text" name="task" autoComplete="off" placeholder="Add Task" maxLength={25} />
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="task" value={task.name} autoComplete="off" placeholder="Add Task" maxLength={25} onChange={event => setTask({...task,name:event.target.value})}/>
             <button type="submit">Add</button>
         </form>
     </section>
